@@ -1,0 +1,21 @@
+x=rnorm(25,50,4);x
+Cl<-lapply(x,t.test);Cl
+magic_for(print,silent=T)
+for(i in 1:100){
+  values=Cl[[i]][["conf.int"]]
+  print(values)
+}
+a=magic_index=seq(2,200,2);a
+odd_indexes=seq(1.199,2);odd_indexes
+intervals=data.frame(a[odd_indexes],a[even_indexes]);intervals
+names(intervals)=c("lower","upper")
+means=lapply(x,mean);means
+intervals&means=as.numeric(means);intervals&means
+intervals&index=1:100;intervals&index
+mydata=melt(intervals,id="index");mydata
+library(ggplot2)
+plot(intervals,aes(x=index,y=means))+
+  geom_points(size=4)+
+  geom_errorbar(aes(ymax=upper,ymin=lower))+
+  geom_hline(yintercept=50,linetype="dashed",color="red",size=2)+
+  coord_flip()
